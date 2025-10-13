@@ -1,0 +1,15 @@
+{  
+  "name": "Michaël Wilk - Data Scientist & Ingénieur IA",  
+  "short_name": "MickaWilk",  
+  "start_url": ".",  
+  "display": "standalone",  
+  "background_color": "#ffffff",  
+  "description": "Portfolio de Michaël Wilk - IA générative, Machine Learning et Cloud Azure",  
+  "icons": [  
+    {  
+      "src": "me.png",  
+      "sizes": "512x512",  
+      "type": "image/png"  
+    }  
+  ]  
+}  
