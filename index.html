@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Wilk - AI Engineer & Data Scientist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00bcd4;
+            --secondary: #0097a7;
+            --accent: #00acc1;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --gradient: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 120px 0 80px;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .hero-text .tagline {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-style: italic;
+            animation: fadeInUp 0.8s ease 0.3s backwards;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-meta-item svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease 0.6s backwards;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: white;
+            padding: 3rem 0;
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: var(--light);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-enhanced {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .about-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .about-card p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .timeline-item strong {
+            display: block;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline-item .company {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .timeline-item .period {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* Skills Section */
+        .skills-enhanced {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .skills-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text);
+            border: 1px solid var(--primary);
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: var(--light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        /* Atouts Section */
+        .atouts {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .atouts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .atout-card {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: var(--light);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .atout-card:hover {
+            background: var(--gradient);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .atout-card h3 {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .atout-icon {
+            font-size: 2rem;
+        }
+
+        /* Interests Section */
+        .interests {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .interest-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .interest-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .interest-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .interest-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Languages Section */
+        .languages {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .language-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .language-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .language-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .language-level {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Contact Section */
+        .contact-enhanced {
+            padding: 80px 0;
+            background: var(--dark);
+            color: white;
+        }
+
+        .contact-enhanced .section-title {
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+
+        .contact-item svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: white;
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .cta-box {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cta-box h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .cta-box ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+
+        .cta-box li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .cta-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: #020617;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content,
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="container">
+            <div class="logo">Michael Wilk</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Accueil</a></li>
+                <li><a href="#about">Parcours</a></li>
+                <li><a href="#skills">Compétences</a></li>
+                <li><a href="#atouts">Atouts</a></li>
+                <li><a href="#interests">Intérêts</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Michaël Wilk</h1>
+                    <p class="subtitle">Data Scientist / Ingénieur IA</p>
+                    <p class="tagline">"Passionné par l'intelligence artificielle et la data, je conçois des solutions concrètes et performantes alliant rigueur technique, sens métier et innovation."</p>
+                    
+                    <div class="hero-meta">
+                        <div class="hero-meta-item">
+                            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <span>Le Bouscat, Nouvelle-Aquitaine</span>
+                        </div>
+                        <div class="hero-meta-item">
+                            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            <span>Contact disponible sur demande</span>
+                        </div>
+                        <div class="hero-meta-item">
+                            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            <span>LinkedIn pour me joindre</span>
+                        </div>
+                    </div>
+
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn btn-primary">Me contacter</a>
+                        <a href="https://www.linkedin.com/in/michael-wilk-783b5867" target="_blank" class="btn btn-secondary">LinkedIn</a>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <!-- PLACEHOLDER IMAGE: Remplacez 'votre-photo.jpg' par le chemin vers votre photo -->
+                    <!-- Format recommandé: carré 400x400px minimum -->
+                    <!-- Placez votre image dans le même dossier que index.html -->
+                    <div style="width: 300px; height: 300px; border-radius: 50%; overflow: hidden; border: 5px solid white; box-shadow: 0 10px 40px rgba(0,0,0,0.3); animation: float 3s ease-in-out infinite;">
+                        <img src="me.png" alt="Michaël Wilk" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg viewBox=\'0 0 400 400\' style=\'width: 100%; height: 100%; background: rgba(255,255,255,0.1);\'><circle cx=\'200\' cy=\'200\' r=\'150\' fill=\'none\' stroke=\'white\' stroke-width=\'2\' opacity=\'0.3\'><animate attributeName=\'r\' from=\'150\' to=\'160\' dur=\'2s\' repeatCount=\'indefinite\' /></circle><circle cx=\'200\' cy=\'200\' r=\'120\' fill=\'none\' stroke=\'white\' stroke-width=\'2\' opacity=\'0.5\'><animate attributeName=\'r\' from=\'120\' to=\'130\' dur=\'2s\' repeatCount=\'indefinite\' /></circle><circle cx=\'200\' cy=\'200\' r=\'90\' fill=\'white\' opacity=\'0.2\' /><text x=\'200\' y=\'220\' text-anchor=\'middle\' fill=\'white\' font-size=\'70\' font-weight=\'bold\'>MW</text></svg>';">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">3+</div>
+                    <div class="stat-label">Années d'expérience IA</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Projets réalisés</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-enhanced">
+        <div class="container">
+            <h2 class="section-title">Mon Parcours</h2>
+            <p class="section-subtitle">Formation et expériences : une timeline complète de la chimie à l'IA</p>
+            
+            <div class="about-grid">
+                <div>
+                    <div class="about-card">
+                        <h3>🎯 Ma Philosophie</h3>
+                        <p>Passionné par l'intelligence artificielle et la data, je conçois des solutions concrètes et performantes alliant rigueur technique, sens métier et innovation.</p>
+                        <p>Mon parcours atypique – de la chimie à la programmation (42 Paris), puis à la data et l'IA (Simplon) – m'a appris à transformer la complexité en solutions simples et adoptées.</p>
+                    </div>
+
+                    <div class="about-card" style="margin-top: 2rem;">
+                        <h3>💼 Aujourd'hui</h3>
+                        <p><strong class="company">Groupe Pichet</strong> - Data Scientist / Ingénieur IA</p>
+                        <p>Je conçois et déploie des solutions d'IA générative et de data science : agents IA pour automatiser les processus métier (AIFoundry / Copilot), applications web intégrant l'IA générative, pipelines RAG, communication technique auprès des équipes métiers.</p>
+                    </div>
+
+                    <div class="about-card" style="margin-top: 2rem;">
+                        <h3>🎓 Certifications</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;">✓ <strong>Azure Fundamentals</strong></li>
+                            <li style="margin-bottom: 0.5rem;">✓ <strong>Azure AI Fundamentals</strong></li>
+                            <li style="margin-bottom: 0.5rem;">✓ <strong>EFSET Medium B2 (CEFR B1/B2)</strong></li>
+                            <li style="margin-bottom: 0.5rem;">✓ <strong>Certificat Méthodes Agiles</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>🚀 Data Scientist / Ingénieur IA (CDI)</strong>
+                        <p class="company">DATA I | Groupe Pichet - Pessac</p>
+                        <p class="period">Avril 2024 - Aujourd'hui</p>
+                        <ul style="margin-top: 0.5rem; padding-left: 1.2rem;">
+                            <li>Conception et mise en production d'agents IA pour automatiser les processus métier (AIFoundry / Copilot)</li>
+                            <li>Développement d'applications web intégrant l'IA générative</li>
+                            <li>Déploiement de pipelines RAG et valorisation des données internes</li>
+                            <li>Communication technique auprès des équipes métiers</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>🔬 Alternance Data Scientist</strong>
+                        <p class="company">DATA I | Groupe Pichet - Pessac</p>
+                        <p class="period">Décembre 2022 - Avril 2024 (1 an 5 mois)</p>
+                        <ul style="margin-top: 0.5rem; padding-left: 1.2rem;">
+                            <li>Exploration et intégration des solutions Azure (OpenAI, ML, Power BI)</li>
+                            <li>Conception d'une application interne IA + Cloud</li>
+                            <li>Mise en place de premiers modèles de ML et pipelines de données</li>
+                            <li>Documentation technique et accompagnement des utilisateurs</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>🎓 Formation Développeur IA - Simplon</strong>
+                        <p class="company">Simplon Grand Ouest – Développeur IA (RNCP Niveau 6)</p>
+                        <p class="period">2022-2024 | Bègles</p>
+                        <p>Alternance Data Science / Web Full Stack / IA Générative</p>
+                        <p style="margin-top: 0.5rem;">Python, Machine Learning, Deep Learning, NLP, Computer Vision, Azure, MLOps, Data Engineering</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>🎮 Streamer | Coach | Joueur Pro Rocket League</strong>
+                        <p class="company">E-Sport & Création de contenu (Parallèle)</p>
+                        <p class="period">Janvier 2018 - 2022</p>
+                        <ul style="margin-top: 0.5rem; padding-left: 1.2rem;">
+                            <li>Casteur et commentateur d'événements e-sport</li>
+                            <li>Animateur Twitch/YouTube - Création de contenu</li>
+                            <li>Coach pour joueurs semi-professionnels</li>
+                            <li>Organisation et animation d'événements communautaires</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>🏪 Aide Boulanger</strong>
+                        <p class="company">Pain et Partage</p>
+                        <p class="period">Décembre 2019 - Mai 2021</p>
+                        <p>Façonnage, préparation, livraison, gestion de stock, norme HACCP</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>💻 Introduction Développeur Web</strong>
+                        <p class="company">OnlyTalent Bordeaux</p>
+                        <p class="period">Mai 2017</p>
+                        <p>Appli/Site de Mise en relation entre Professionnels/Talents/Passionnés</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>🛠️ Interim | Petits Boulots</strong>
+                        <p class="company">Johannes Boubee | Jennifer | Gironde</p>
+                        <p class="period">Juin 2017 - Novembre 2017</p>
+                        <p>Préparation commande, Stock, Montage de Meuble, Remplissage de benne à céréales, Comptage de vêtement</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>🎓 Formation École 42 Paris</strong>
+                        <p class="company">École 42 – Expert Architecture Informatique (RNCP niveau 7)</p>
+                        <p class="period">2014-2017 | Paris Clichy</p>
+                        <p>C, C++, Assembleur, Shell, PHP, Python, MySQL, algorithmique, peer-learning</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>🚗 Chauffeur Livreur</strong>
+                        <p class="company">ELIS SERVICES - Gradignan</p>
+                        <p class="period">2013</p>
+                        <p>Livraison professionnelle</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>🎓 Licence Chimie (BAC+3)</strong>
+                        <p class="company">Université Bordeaux 1</p>
+                        <p class="period">2010-2014 | Talence</p>
+                        <p>Formation scientifique rigoureuse</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>🎰 Mise en rayon / conseil client</strong>
+                        <p class="company">Géant Casino Pessac</p>
+                        <p class="period">2012</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>🥖 Employé polyvalent de restauration</strong>
+                        <p class="company">McDonald's</p>
+                        <p class="period">2011</p>
+                        <p>Chef de production</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <strong>📦 Manutentionnaire</strong>
+                        <p class="company">Dickies Gradignan</p>
+                        <p class="period">2010</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-enhanced">
+        <div class="container">
+            <h2 class="section-title">Compétences Techniques</h2>
+            <p class="section-subtitle">Une expertise complète de l'IA à la production</p>
+            
+            <div class="skills-categories">
+                <div class="skill-category">
+                    <h3>🤖 IA & Machine Learning</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Azure OpenAI & GPT Models</span>
+                            <span>Expert</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>RAG & Agents IA</span>
+                            <span>Expert</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Machine Learning (Scikit-learn, TensorFlow)</span>
+                            <span>Avancé</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">LangChain</span>
+                        <span class="skill-tag">Semantic Kernel</span>
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">Hugging Face</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>☁️ Cloud & DevOps</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Microsoft Azure</span>
+                            <span>Expert</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Docker & Kubernetes</span>
+                            <span>Avancé</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Azure Functions</span>
+                        <span class="skill-tag">Azure ML</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">Git/GitHub</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>💻 Développement</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Python</span>
+                            <span>Expert</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>C / C++</span>
+                            <span>Avancé</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>JavaScript / Node.js</span>
+                            <span>Intermédiaire</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">Shell/Bash</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>📊 Data Science & Analytics</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Data Analysis & Visualization</span>
+                            <span>Expert</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>SQL & Databases</span>
+                            <span>Avancé</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">NumPy</span>
+                        <span class="skill-tag">Matplotlib</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">MySQL</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🔧 Outils & Méthodologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git/Gitlab</span>
+                        <span class="skill-tag">Agile/Scrum</span>
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">Jupyter</span>
+                        <span class="skill-tag">Linux/Unix</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🎯 Architecture & Design</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Microservices</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">Design Patterns</span>
+                        <span class="skill-tag">UE4/Blueprint</span>
+                        <span class="skill-tag">Clean Code</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Atouts Section -->
+    <section id="atouts" class="atouts">
+        <div class="container">
+            <h2 class="section-title">Mes Qualités</h2>
+            <p class="section-subtitle">Les atouts qui font la différence au quotidien</p>
+            
+            <div class="atouts-grid">
+                <div class="atout-card">
+                    <div class="atout-icon">💡</div>
+                    <h3>Créativité</h3>
+                </div>
+                <div class="atout-card">
+                    <div class="atout-icon">😊</div>
+                    <h3>Curiosité</h3>
+                </div>
+                <div class="atout-card">
+                    <div class="atout-icon">🔄</div>
+                    <h3>Capacité d'adaptation</h3>
+                </div>
+                <div class="atout-card">
+                    <div class="atout-icon">👥</div>
+                    <h3>Compétences relationnelles</h3>
+                </div>
+                <div class="atout-card">
+                    <div class="atout-icon">💪</div>
+                    <h3>Assiduité</h3>
+                </div>
+                <div class="atout-card">
+                    <div class="atout-icon">⚡</div>
+                    <h3>Apprentissage Rapide</h3>
+                </div>
+                <div class="atout-card">
+                    <div class="atout-icon">🚗</div>
+                    <h3>Autonomie</h3>
+                </div>
+                <div class="atout-card">
+                    <div class="atout-icon">🎯</div>
+                    <h3>Polyvalence</h3>
+                </div>
+                <div class="atout-card">
+                    <div class="atout-icon">🎓</div>
+                    <h3>Rigueur</h3>
+                </div>
+                <div class="atout-card">
+                    <div class="atout-icon">❄️</div>
+                    <h3>Sang Froid</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Languages Section -->
+    <section class="languages">
+        <div class="container">
+            <h2 class="section-title">Langues</h2>
+            <p class="section-subtitle">Compétences linguistiques</p>
+            
+            <div class="languages-grid">
+                <div class="language-card">
+                    <h3>🇫🇷 Français</h3>
+                    <p class="language-level">Natif</p>
+                </div>
+                <div class="language-card">
+                    <h3>🇬🇧 Anglais</h3>
+                    <p class="language-level">Professionnel</p>
+                </div>
+                <div class="language-card">
+                    <h3>🇪🇸 Espagnol</h3>
+                    <p class="language-level">Intermédiaire</p>
+                </div>
+                <div class="language-card">
+                    <h3>🇯🇵 Japonais</h3>
+                    <p class="language-level">En apprentissage</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests Section -->
+    <section id="interests" class="interests">
+        <div class="container">
+            <h2 class="section-title">Centres d'Intérêt & Loisirs</h2>
+            <p class="section-subtitle">Passions et engagements qui nourrissent ma créativité</p>
+            
+            <div class="interests-grid">
+                <div class="interest-card">
+                    <div class="interest-icon">💃</div>
+                    <h3>Danse</h3>
+                    <p>Salsa - Expression corporelle et créative</p>
+                </div>
+                <div class="interest-card">
+                    <div class="interest-icon">🏊</div>
+                    <h3>Sports</h3>
+                    <p>Natation, Bowling, Paddel, Badminton - Discipline et dépassement de soi</p>
+                </div>
+                <div class="interest-card">
+                    <div class="interest-icon">🎮</div>
+                    <h3>E-Sport & Gaming</h3>
+                    <p>Ex-joueur semi-pro (Top 100 mondial) et Coach Rocket League (Top 3 pendant plus d'1an).
+                        Concentration, rigueur, pédagogie, self-control, adaptation, gestion de scène et communication.</p>
+                </div>
+                <div class="interest-card">
+                    <div class="interest-icon">🎬</div>
+                    <h3>Streaming & Création</h3>
+                    <p>Casteur, commentateur, animateur Twitch/YouTube/Association Bordelaise.
+                        Organisation, gestion d'événements, expression orale.</p>
+                </div>
+                <div class="interest-card">
+                    <div class="interest-icon">🎵</div>
+                    <h3>Musique</h3>
+                    <p>Batterie, Synthé, Fruity Loops - Création musicale</p>
+                </div>
+                <div class="interest-card">
+                    <div class="interest-icon">🧘</div>
+                    <h3>Bien-être</h3>
+                    <p>Méditation, Workout, Nutrition, Psychologie</p>
+                </div>
+                <div class="interest-card">
+                    <div class="interest-icon">🎨</div>
+                    <h3>Algorithmes</h3>
+                    <p>Codingame, Battledev, Codewars - Résolution de problèmes complexes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Enhanced -->
+    <section id="contact" class="contact-enhanced">
+        <div class="container">
+            <h2 class="section-title">Contactez-moi</h2>
+            <p class="section-subtitle">Discutons de votre prochain projet IA</p>
+            
+            <div class="contact-grid">
+                <div class="contact-info-list">
+                    <div class="contact-item">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                        <div>
+                            <strong>Localisation</strong>
+                            <p>Le Bouscat, Nouvelle-Aquitaine</p>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Véhicule personnel - Permis B</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        <div>
+                            <strong>Contact</strong>
+                            <p>Disponible via LinkedIn ou GitHub</p>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/michael-wilk-783b5867" target="_blank" title="LinkedIn">
+                            <svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/MichaelWilk" target="_blank" title="GitHub">
+                            <svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="cta-box">
+                    <h3>Prêt à collaborer ?</h3>
+                    <ul>
+                        <li>Conception et déploiement de solutions IA</li>
+                        <li>Développement d'agents intelligents et RAG</li>
+                        <li>Architecture cloud et pipelines ML</li>
+                        <li>Applications full-stack avec IA générative</li>
+                        <li>Conseil et formation en Data Science</li>
+                    </ul>
+                    <a href="https://www.linkedin.com/in/michael-wilk-783b5867" target="_blank" class="btn btn-primary" style="display: inline-block;">Me contacter sur LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Michael Wilk - AI Engineer & Data Scientist</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">
+                Développé avec passion | "Transformer la complexité en solutions simples"
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll enhancement
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Skill bars animation on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.skill-progress');
+                    progressBars.forEach(bar => {
+                        bar.style.width = bar.style.width;
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-category').forEach(category => {
+            observer.observe(category);
+        });
+    </script>
+</body>
+</html>
