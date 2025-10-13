@@ -1,0 +1,3 @@
+User-agent: *  
+Allow: /  
+Sitemap: https://mickawilk.github.io/michael-wilk/sitemap.xml  
