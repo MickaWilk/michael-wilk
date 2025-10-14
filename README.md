@@ -61,7 +61,7 @@ Créativité • Curiosité • Adaptabilité • Relationnel • Assiduité •
   
 ## 📬 Me contacter  
 - **LinkedIn** : [linkedin.com/in/michael-wilk-783b5867](https://www.linkedin.com/in/michael-wilk-783b5867)    
-- **GitHub** : [github.com/MichaelWilk](https://github.com/MichaelWilk)  
+- **GitHub** : [github.com/MichaelWilk](https://github.com/MickaWilk)  
   
 ---  
   
