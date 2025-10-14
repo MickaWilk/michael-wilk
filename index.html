@@ -53,7 +53,382 @@
   <link rel="stylesheet" href="style.css">  
 </head>
 <body>
-    <nav id="navbar">
+    <!-- Modal Container -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalContent" class="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        // Modal System
+        const modalData = {
+            'esport-streamer': {
+                title: '🎮 Streamer | Coach | Joueur Pro Rocket League',
+                content: `
+                    <div class="modal-section">
+                        <h3>Statistiques Twitch</h3>
+                        <img src="twitch-stats.png" alt="Statistiques Twitch" class="modal-image" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="placeholder-stats" style="display:none;">
+                            <p>📊 Statistiques principales :</p>
+                            <ul>
+                                <li>Top 100 mondial Rocket League</li>
+                                <li>Top 3 en tant que Coach pendant +1 an</li>
+                                <li>Commentateur d'événements e-sport</li>
+                                <li>Animateur communautaire actif</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Compétences développées</h3>
+                        <p>Cette expérience m'a permis de développer des compétences essentielles :</p>
+                        <ul>
+                            <li><strong>Communication :</strong> Animation en direct, casteur d'événements</li>
+                            <li><strong>Pédagogie :</strong> Coaching de joueurs semi-professionnels</li>
+                            <li><strong>Gestion de stress :</strong> Performances sous pression en compétition</li>
+                            <li><strong>Organisation :</strong> Planification et animation d'événements</li>
+                            <li><strong>Adaptabilité :</strong> Ajustement stratégique en temps réel</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <p><strong>📍 Localisation :</strong> En ligne (Twitch/YouTube) & Association Bordelaise</p>
+                        <p><strong>🔗 Liens :</strong> Profils désormais privés</p>
+                    </div>
+                `
+            },
+            'data-scientist-cdi': {
+                title: '🚀 Data Scientist / Ingénieur IA - Groupe Pichet',
+                content: `
+                    <div class="modal-section">
+                        <h3>À propos du poste</h3>
+                        <p><strong>Période :</strong> Avril 2024 - Aujourd'hui</p>
+                        <p><strong>Entreprise :</strong> DATA I | Groupe Pichet</p>
+                        <p><strong>Localisation :</strong> Pessac, Nouvelle-Aquitaine</p>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Missions principales</h3>
+                        <ul>
+                            <li>Conception et mise en production d'agents IA pour automatiser les processus métier (AIFoundry / Copilot)</li>
+                            <li>Développement d'applications web intégrant l'IA générative</li>
+                            <li>Déploiement de pipelines RAG et valorisation des données internes</li>
+                            <li>Communication technique auprès des équipes métiers</li>
+                            <li>Architecture cloud sur Azure (OpenAI, ML, Functions)</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Localisation</h3>
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.8!2d-0.6319!3d44.8064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDTCsDQ4JzIzLjAiTiAwwrAzNyc1NC45Ilc!5e0!3m2!1sfr!2sfr!4v1234567890" 
+                            width="100%" 
+                            height="300" 
+                            style="border:0; border-radius: 8px;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                `
+            },
+            'data-scientist-alternance': {
+                title: '🔬 Alternance Data Scientist - Groupe Pichet',
+                content: `
+                    <div class="modal-section">
+                        <p><strong>Période :</strong> Décembre 2022 - Avril 2024 (1 an 5 mois)</p>
+                        <p><strong>Entreprise :</strong> DATA I | Groupe Pichet</p>
+                        <p><strong>Localisation :</strong> Pessac, Nouvelle-Aquitaine</p>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Réalisations</h3>
+                        <ul>
+                            <li>Exploration et intégration des solutions Azure (OpenAI, ML, Power BI)</li>
+                            <li>Conception d'une application interne IA + Cloud</li>
+                            <li>Mise en place de premiers modèles de ML et pipelines de données</li>
+                            <li>Documentation technique et accompagnement des utilisateurs</li>
+                            <li>POC et tests de solutions d'IA générative</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'simplon': {
+                title: '🎓 Formation Développeur IA - Simplon',
+                content: `
+                    <div class="modal-section">
+                        <p><strong>Formation :</strong> Développeur IA (RNCP Niveau 6)</p>
+                        <p><strong>Période :</strong> 2022-2024</p>
+                        <p><strong>Localisation :</strong> Bègles, Nouvelle-Aquitaine</p>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Programme</h3>
+                        <ul>
+                            <li><strong>Data Science :</strong> Python, Pandas, NumPy, Matplotlib</li>
+                            <li><strong>Machine Learning :</strong> Scikit-learn, TensorFlow, PyTorch</li>
+                            <li><strong>Deep Learning :</strong> CNN, RNN, NLP</li>
+                            <li><strong>IA Générative :</strong> LLMs, RAG, Agents</li>
+                            <li><strong>Cloud :</strong> Azure ML, MLOps, Data Engineering</li>
+                            <li><strong>Web Full Stack :</strong> FastAPI, Flask, HTML/CSS/JS</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Localisation</h3>
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2831.5!2d-0.5479!3d44.8078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0!2zNDTCsDQ4JzI4LjEiTiAwwrAzMic1Mi40Ilc!5e0!3m2!1sfr!2sfr!4v1234567890" 
+                            width="100%" 
+                            height="300" 
+                            style="border:0; border-radius: 8px;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                `
+            },
+            'ecole-42': {
+                title: '🎓 École 42 Paris',
+                content: `
+                    <div class="modal-section">
+                        <p><strong>Formation :</strong> Expert Architecture Informatique (RNCP niveau 7)</p>
+                        <p><strong>Période :</strong> 2014-2017</p>
+                        <p><strong>Localisation :</strong> Paris Clichy</p>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Pédagogie unique</h3>
+                        <p>L'École 42 est reconnue pour sa pédagogie innovante basée sur le peer-learning et la pratique intensive.</p>
+                        <ul>
+                            <li><strong>Langages :</strong> C, C++, Assembleur, Shell, PHP, Python</li>
+                            <li><strong>Compétences :</strong> Algorithmique avancée, système Unix/Linux</li>
+                            <li><strong>Méthodes :</strong> Apprentissage par projets, peer-to-peer</li>
+                            <li><strong>Soft skills :</strong> Autonomie, collaboration, résolution de problèmes</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Localisation</h3>
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2623.8!2d2.3147!3d48.8965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fec70fb1d8d%3A0x6b9b3b8f5f8f5f8f!2s96%20Boulevard%20Bessieres%2C%2075017%20Paris!5e0!3m2!1sfr!2sfr!4v1234567890" 
+                            width="100%" 
+                            height="300" 
+                            style="border:0; border-radius: 8px;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                `
+            },
+            'danse': {
+                title: '💃 Danse - Salsa',
+                content: `
+                    <div class="modal-section">
+                        <h3>Pratique de la Salsa</h3>
+                        <p>La danse, et particulièrement la salsa, est pour moi un excellent moyen d'expression corporelle et de développement personnel.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Apports personnels</h3>
+                        <ul>
+                            <li><strong>Coordination :</strong> Synchronisation et précision des mouvements</li>
+                            <li><strong>Écoute :</strong> Attention au partenaire et à la musique</li>
+                            <li><strong>Confiance :</strong> Guidage et connexion avec le partenaire</li>
+                            <li><strong>Créativité :</strong> Improvisation et expression artistique</li>
+                            <li><strong>Social :</strong> Rencontres et échanges culturels</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'sports': {
+                title: '🏊 Sports & Activités Physiques',
+                content: `
+                    <div class="modal-section">
+                        <h3>Mes activités sportives</h3>
+                        <p>Le sport fait partie intégrante de mon équilibre personnel et professionnel.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Disciplines pratiquées</h3>
+                        <ul>
+                            <li><strong>Natation :</strong> Endurance et technique, relaxation mentale</li>
+                            <li><strong>Bowling :</strong> Précision et concentration</li>
+                            <li><strong>Padel :</strong> Coordination et stratégie en équipe</li>
+                            <li><strong>Badminton :</strong> Réactivité et agilité</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Valeurs développées</h3>
+                        <p>Ces activités m'apportent discipline, persévérance, dépassement de soi et esprit d'équipe.</p>
+                    </div>
+                `
+            },
+            'streaming': {
+                title: '🎬 Streaming & Création de Contenu',
+                content: `
+                    <div class="modal-section">
+                        <h3>Expérience de création</h3>
+                        <p>Casteur, commentateur et animateur sur plusieurs plateformes et événements.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Activités</h3>
+                        <ul>
+                            <li><strong>Casting :</strong> Commentateur d'événements e-sport en direct</li>
+                            <li><strong>Animation :</strong> Streams réguliers sur Twitch/YouTube</li>
+                            <li><strong>Organisation :</strong> Gestion d'événements communautaires</li>
+                            <li><strong>Association :</strong> Implication dans une association bordelaise</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Compétences acquises</h3>
+                        <p>Expression orale, gestion de scène, organisation d'événements, communication publique, montage vidéo.</p>
+                    </div>
+                `
+            },
+            'musique': {
+                title: '🎵 Musique & Création Sonore',
+                content: `
+                    <div class="modal-section">
+                        <h3>Pratiques musicales</h3>
+                        <p>La musique est un moyen d'expression créative et de relaxation.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Instruments et outils</h3>
+                        <ul>
+                            <li><strong>Batterie :</strong> Rythme et coordination</li>
+                            <li><strong>Synthétiseur :</strong> Exploration sonore</li>
+                            <li><strong>FL Studio :</strong> Composition et production musicale</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Créativité</h3>
+                        <p>La création musicale développe la patience, la créativité et l'écoute active.</p>
+                    </div>
+                `
+            },
+            'bienetre': {
+                title: '🧘 Bien-être & Développement Personnel',
+                content: `
+                    <div class="modal-section">
+                        <h3>Approche holistique</h3>
+                        <p>Le bien-être mental et physique est essentiel pour une performance optimale.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Pratiques</h3>
+                        <ul>
+                            <li><strong>Méditation :</strong> Concentration et gestion du stress</li>
+                            <li><strong>Workout :</strong> Condition physique et discipline</li>
+                            <li><strong>Nutrition :</strong> Alimentation consciente et équilibrée</li>
+                            <li><strong>Psychologie :</strong> Compréhension de soi et des autres</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Bénéfices</h3>
+                        <p>Ces pratiques améliorent la clarté mentale, la résilience et l'équilibre émotionnel au quotidien.</p>
+                    </div>
+                `
+            },
+            'algorithmes': {
+                title: '🎨 Algorithmes & Résolution de Problèmes',
+                content: `
+                    <div class="modal-section">
+                        <h3>Passion pour l'algorithmique</h3>
+                        <p>Résolution de problèmes complexes et optimisation de code sur différentes plateformes.</p>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Plateformes</h3>
+                        <ul>
+                            <li><strong>CodinGame :</strong> Challenges et puzzles algorithmiques</li>
+                            <li><strong>BattleDev :</strong> Compétitions de programmation</li>
+                            <li><strong>CodeWars :</strong> Katas et exercices de code</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Compétences développées</h3>
+                        <p>Pensée logique, optimisation algorithmique, résolution créative de problèmes, apprentissage continu.</p>
+                        <p><strong>🔗 Ressources :</strong></p>
+                        <ul>
+                            <li><a href="https://www.codingame.com" target="_blank">CodinGame</a></li>
+                            <li><a href="https://www.codewars.com" target="_blank">CodeWars</a></li>
+                        </ul>
+                    </div>
+                `
+            }
+        };
+
+        function openModal(dataKey) {
+            const data = modalData[dataKey];
+            if (!data) return;
+            
+            const modal = document.getElementById('modalOverlay');
+            const content = document.getElementById('modalContent');
+            
+            content.innerHTML = `
+                <h2>${data.title}</h2>
+                ${data.content}
+            `;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modalOverlay');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on overlay click
+        document.getElementById('modalOverlay').addEventListener('click', (e) => {
+            if (e.target.id === 'modalOverlay') {
+                closeModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Smooth scroll enhancement
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Skill bars animation on scroll
+        const skillObserverOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.skill-progress');
+                    progressBars.forEach(bar => {
+                        bar.style.width = bar.style.width;
+                    });
+                }
+            });
+        }, skillObserverOptions);
+
+        document.querySelectorAll('.skill-category').forEach(category => {
+            skillObserver.observe(category);
+        });
+    </script>
+</body>
         <div class="container">
             <div class="logo">Michael Wilk</div>
             <ul class="nav-links">
@@ -97,9 +472,6 @@
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; justify-content: center;">
-                    <!-- PLACEHOLDER IMAGE: Remplacez 'votre-photo.jpg' par le chemin vers votre photo -->
-                    <!-- Format recommandé: carré 400x400px minimum -->
-                    <!-- Placez votre image dans le même dossier que index.html -->
                     <div style="width: 300px; height: 300px; border-radius: 50%; overflow: hidden; border: 5px solid white; box-shadow: 0 10px 40px rgba(0,0,0,0.3); animation: float 3s ease-in-out infinite;">
                         <img src="me.png" alt="Michaël Wilk" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg viewBox=\'0 0 400 400\' style=\'width: 100%; height: 100%; background: rgba(255,255,255,0.1);\'><circle cx=\'200\' cy=\'200\' r=\'150\' fill=\'none\' stroke=\'white\' stroke-width=\'2\' opacity=\'0.3\'><animate attributeName=\'r\' from=\'150\' to=\'160\' dur=\'2s\' repeatCount=\'indefinite\' /></circle><circle cx=\'200\' cy=\'200\' r=\'120\' fill=\'none\' stroke=\'white\' stroke-width=\'2\' opacity=\'0.5\'><animate attributeName=\'r\' from=\'120\' to=\'130\' dur=\'2s\' repeatCount=\'indefinite\' /></circle><circle cx=\'200\' cy=\'200\' r=\'90\' fill=\'white\' opacity=\'0.2\' /><text x=\'200\' y=\'220\' text-anchor=\'middle\' fill=\'white\' font-size=\'70\' font-weight=\'bold\'>MW</text></svg>';">
                     </div>
@@ -608,6 +980,8 @@
         </div>
     </footer>
 
+
+    
     <script>
         // Smooth scroll enhancement
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
