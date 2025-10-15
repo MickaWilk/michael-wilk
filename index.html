@@ -871,39 +871,39 @@
             <p class="section-subtitle">Passions et engagements qui nourrissent ma créativité</p>
             
             <div class="interests-grid">
-                <div class="interest-card">
+                <div class="interest-card clickable-item" data-modal="danse" role="button" tabindex="0" aria-controls="modalOverlay" aria-expanded="false">
                     <div class="interest-icon">💃</div>
                     <h3>Danse</h3>
                     <p>Salsa - Expression corporelle et créative</p>
                 </div>
-                <div class="interest-card">
+                <div class="interest-card clickable-item" data-modal="sports" role="button" tabindex="0" aria-controls="modalOverlay" aria-expanded="false">
                     <div class="interest-icon">🏊</div>
                     <h3>Sports</h3>
                     <p>Natation, Bowling, Paddel, Badminton - Discipline et dépassement de soi</p>
                 </div>
-                <div class="interest-card">
+                <div class="interest-card clickable-item" data-modal="esport-streamer" role="button" tabindex="0" aria-controls="modalOverlay" aria-expanded="false">
                     <div class="interest-icon">🎮</div>
                     <h3>E-Sport & Gaming</h3>
                     <p>Ex-joueur semi-pro (Top 100 mondial) et Coach Rocket League (Top 3 pendant plus d'1an).
                         Concentration, rigueur, pédagogie, self-control, adaptation, gestion de scène et communication.</p>
                 </div>
-                <div class="interest-card">
+                <div class="interest-card clickable-item" data-modal="streaming" role="button" tabindex="0" aria-controls="modalOverlay" aria-expanded="false">
                     <div class="interest-icon">🎬</div>
                     <h3>Streaming & Création</h3>
                     <p>Casteur, commentateur, animateur Twitch/YouTube/Association Bordelaise.
                         Organisation, gestion d'événements, expression orale.</p>
                 </div>
-                <div class="interest-card">
+                <div class="interest-card clickable-item" data-modal="musique" role="button" tabindex="0" aria-controls="modalOverlay" aria-expanded="false">
                     <div class="interest-icon">🎵</div>
                     <h3>Musique</h3>
                     <p>Batterie, Synthé, Fruity Loops - Création musicale</p>
                 </div>
-                <div class="interest-card">
+                <div class="interest-card clickable-item" data-modal="bienetre" role="button" tabindex="0" aria-controls="modalOverlay" aria-expanded="false">
                     <div class="interest-icon">🧘</div>
                     <h3>Bien-être</h3>
                     <p>Méditation, Workout, Nutrition, Psychologie</p>
                 </div>
-                <div class="interest-card">
+                <div class="interest-card clickable-item" data-modal="algorithmes" role="button" tabindex="0" aria-controls="modalOverlay" aria-expanded="false">
                     <div class="interest-icon">🎨</div>
                     <h3>Algorithmes</h3>
                     <p>Codingame, Battledev, Codewars - Résolution de problèmes complexes</p>
@@ -983,6 +983,51 @@
 
     
     <script>
+        // Attach modal handlers to clickable interest cards and manage ARIA
+        (function attachModalHandlers() {
+            const items = document.querySelectorAll('.clickable-item[data-modal]');
+            if (!items || items.length === 0) return;
+
+            let lastActive = null;
+
+            function setExpanded(item, state) {
+                if (!item) return;
+                item.setAttribute('aria-expanded', state ? 'true' : 'false');
+            }
+
+            items.forEach(item => {
+                const key = item.getAttribute('data-modal');
+                item.addEventListener('click', () => {
+                    // reset previous
+                    if (lastActive && lastActive !== item) setExpanded(lastActive, false);
+                    setExpanded(item, true);
+                    lastActive = item;
+                    openModal(key);
+                });
+
+                // keyboard accessibility
+                item.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        if (lastActive && lastActive !== item) setExpanded(lastActive, false);
+                        setExpanded(item, true);
+                        lastActive = item;
+                        openModal(key);
+                    }
+                });
+            });
+
+            // ensure aria-expanded reset when modal closes
+            const originalCloseModal = closeModal;
+            closeModal = function() {
+                originalCloseModal();
+                if (lastActive) {
+                    setExpanded(lastActive, false);
+                    lastActive = null;
+                }
+            };
+        })();
+
         // Smooth scroll enhancement
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
