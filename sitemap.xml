@@ -1,7 +1,60 @@
-<?xml version="1.0" encoding="UTF-8"?>  
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">  
-  <url>  
-    <loc>https://mickawilk.github.io/michael-wilk/</loc>  
-    <priority>1.0</priority>  
-  </url>  
-</urlset>  
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Page principale -->
+  <url>
+    <loc>https://mickawilk.github.io/michael-wilk/</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    
+    <!-- Images importantes pour SEO -->
+    <image:image>
+      <image:loc>https://mickawilk.github.io/michael-wilk/me.png</image:loc>
+      <image:title>Michaël Wilk - Data Scientist et Ingénieur IA</image:title>
+      <image:caption>Photo professionnelle de Michaël Wilk, Data Scientist spécialisé en IA générative</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Section Parcours -->
+  <url>
+    <loc>https://mickawilk.github.io/michael-wilk/#about</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Section Compétences -->
+  <url>
+    <loc>https://mickawilk.github.io/michael-wilk/#skills</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Section Atouts -->
+  <url>
+    <loc>https://mickawilk.github.io/michael-wilk/#atouts</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Section Intérêts -->
+  <url>
+    <loc>https://mickawilk.github.io/michael-wilk/#interests</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Section Contact -->
+  <url>
+    <loc>https://mickawilk.github.io/michael-wilk/#contact</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+</urlset>

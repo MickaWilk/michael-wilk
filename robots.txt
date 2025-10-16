@@ -1,3 +1,23 @@
-User-agent: *  
-Allow: /  
-Sitemap: https://mickawilk.github.io/michael-wilk/sitemap.xml  
+User-agent: *
+Allow: /
+Sitemap: https://mickawilk.github.io/michael-wilk/sitemap.xml
+
+# Autoriser tous les robots d'indexation
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Bloquer les mauvais bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+# Fréquence de crawl (optionnel)
+Crawl-delay: 1
