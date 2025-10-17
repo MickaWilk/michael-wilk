@@ -2,6 +2,12 @@
    MODAL SYSTEM STYLES
    ======================= */
 
+/* NOTE: Ce fichier contient des styles de modale qui sont également définis
+    dans `style.css`. Pour éviter des conflits et du code dupliqué, consolidez
+    les règles dans un seul fichier (préféré: `style.css`) ou importez explicitement
+    ce fichier seulement si vous remplacez les styles existants. */
+
+
 .modal-overlay {
     position: fixed;
     top: 0;

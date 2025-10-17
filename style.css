@@ -232,9 +232,8 @@
     opacity: 0.8;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+/* Global scroll behaviour (declared once) */
+html { scroll-behavior: smooth; }
 
 /* Responsive Modal */
 @media (max-width: 768px) {
@@ -260,6 +259,73 @@ html {
         transform: translateX(5px);
     }
 }
+
+/* Responsive navbar: mobile menu */
+nav .mobile-menu-toggle {
+    display: none; /* default hidden, enabled on small screens below */
+}
+
+@media (max-width: 768px) {
+    nav .mobile-menu-toggle {
+        display: flex;
+        background: none;
+        border: none;
+        align-items: center;
+        gap: 6px;
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 60px; /* below navbar */
+        right: -100%;
+        height: calc(100vh - 60px);
+        width: 80%;
+        max-width: 320px;
+        background: white;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        gap: 1.2rem;
+        transition: right 0.28s ease;
+        box-shadow: -8px 0 30px rgba(0,0,0,0.12);
+        z-index: 1100;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li { width: 100%; }
+    .nav-links a { display: block; padding: 8px 12px; width: 100%; }
+}
+
+/* Profile ring + ripple animation */
+.profile-ring { position: relative; display: inline-block; overflow: visible; }
+.profile-ring::after {
+    content: '';
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+}
+.profile-ring.ripple::after {
+    animation: ripple 1s ease-out forwards;
+}
+
+@keyframes ripple {
+    0% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.6); box-shadow: 0 0 0 0 rgba(0,188,212,0.4); }
+    70% { opacity: 0.2; transform: translate(-50%, -50%) scale(1.6); box-shadow: 0 0 0 20px rgba(0,188,212,0.06); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(2); box-shadow: none; }
+}
+
+/* Make logo apparent as clickable */
+.logo { cursor: pointer; }
+.logo:focus { outline: 3px solid rgba(0,188,212,0.18); outline-offset: 3px; }
 * {
     margin: 0;
     padding: 0;

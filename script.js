@@ -871,6 +871,30 @@ document.addEventListener('DOMContentLoaded', function() {
             navLinks?.classList.toggle('active');
         });
     }
+
+    // Logo click: scroll to top, remove 'Accueil' link and ripple effect
+    const logo = document.getElementById('logo');
+    if (logo) {
+        const homeLink = document.querySelector('.nav-links a[href="#hero"]');
+        logo.addEventListener('click', () => {
+            if (homeLink) homeLink.parentElement.remove();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // ripple animation
+            const ring = document.querySelector('.profile-ring');
+            if (ring) {
+                ring.classList.remove('ripple');
+                // trigger reflow
+                void ring.offsetWidth;
+                ring.classList.add('ripple');
+            }
+        });
+        logo.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                logo.click();
+            }
+        });
+    }
 });
 
 // =======================
